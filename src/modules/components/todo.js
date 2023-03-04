@@ -68,8 +68,6 @@ const todo = (todo) => {
     todoContainer.appendChild(todoProject);
     todoContainer.appendChild(showMoreBtn);
 
-    todoContainer.style.animationDelay = `${todo.id / 10}s`;
-
     return todoContainer;
 };
 

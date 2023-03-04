@@ -49,6 +49,7 @@ const renderHome = () => {
     pageContainer.appendChild(homeCardsContainer);
     return pageContainer;
 };
+
 const renderPage = (pageName) => {
     const pageContainer = document.createElement("div");
     const pageTitle = document.createElement("h1");
@@ -74,8 +75,10 @@ const renderPage = (pageName) => {
         t.innerText = "No todos Found in " + pageName;
         todoList.appendChild(t);
     } else {
-        todosToDisplay.forEach((todoObj) => {
-            todoList.appendChild(todo(todoObj));
+        todosToDisplay.forEach((todoObj, i) => {
+            const newTodo = todo(todoObj);
+            newTodo.style.animationDelay = `${i / 10}s`;
+            todoList.appendChild(newTodo);
         });
     }
 

@@ -1,5 +1,16 @@
-import { getProjects } from "../controllers/projectsController";
+import { getProject, getProjects } from "../controllers/projectsController";
+import { addTodo as addTodoBackend } from "../controllers/todosController";
 import { toggleBlackOverlay } from "./overlay";
+import Todo from "../classes/Todo";
+
+const closeAddTodo = () => {
+    document.querySelector(".add-todo-form").style.animationName = "add-todo-disappear";
+    toggleBlackOverlay();
+    setTimeout(() => {
+        document.querySelector(".add-todo-form").remove();
+    }, 900);
+};
+
 const addTodo = () => {
     const form = document.createElement("form");
     const formTitle = document.createElement("p");
@@ -17,7 +28,7 @@ const addTodo = () => {
     const d4 = document.createElement("div");
     const addTodoBtn = document.createElement("button");
     const closeOverlayBtn = document.createElement("button");
-    const blackOverlay = document.createElement("div");
+    const infoContainer = document.createElement("div");
 
     const emptyOption = document.createElement("option");
     emptyOption.textContent = "Please select a project";
@@ -28,6 +39,7 @@ const addTodo = () => {
         const projectOption = document.createElement("option");
         projectOption.value = index;
         projectOption.textContent = project.name;
+        if (document.querySelector(".page-container")?.getAttribute("id") === project.name) projectOption.selected = true;
         projectsSelect.appendChild(projectOption);
     });
 
@@ -52,13 +64,22 @@ const addTodo = () => {
     descTxtArea.classList.add("add-todo-desc");
     addTodoBtn.setAttribute("id", "add-todo-submit");
     closeOverlayBtn.setAttribute("id", "close-add-todo");
+    infoContainer.classList.add("info-container");
 
-    closeOverlayBtn.onclick = (e) => {
-        e.target.parentElement.style.animationName = "add-todo-disappear";
-        toggleBlackOverlay();
-        setTimeout(() => {
-            e.target.parentElement.remove();
-        }, 900);
+    closeOverlayBtn.onclick = closeAddTodo;
+
+    form.onsubmit = (e) => {
+        e.preventDefault();
+        const form = e.currentTarget;
+        const title = titleInput.value.trim();
+        const desc = descTxtArea.value.trim();
+        const project = projectsSelect.value;
+        const date = dateInput.value;
+        if (title && desc && project && date) {
+            const newTodo = new Todo(title, desc, getProject(project), new Date(date));
+            addTodoBackend(newTodo);
+            closeAddTodo();
+        }
     };
 
     d.appendChild(titleLabel);
@@ -80,6 +101,7 @@ const addTodo = () => {
     form.appendChild(d4);
     form.appendChild(addTodoBtn);
     form.appendChild(closeOverlayBtn);
+    form.appendChild(infoContainer);
     return form;
 };
 
