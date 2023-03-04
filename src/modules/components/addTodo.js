@@ -7,7 +7,7 @@ const closeAddTodo = () => {
     document.querySelector(".add-todo-form").style.animationName = "add-todo-disappear";
     toggleBlackOverlay();
     setTimeout(() => {
-        document.querySelector(".add-todo-form").remove();
+        document.querySelector(".add-todo-form")?.remove();
     }, 900);
 };
 
@@ -59,7 +59,7 @@ const addTodo = () => {
     addTodoBtn.type = "submit";
     closeOverlayBtn.type = "button";
 
-    form.classList.add("add-todo-form");
+    form.classList.add("add-todo-form", "fixed-center");
     formTitle.classList.add("form-title");
     descTxtArea.classList.add("add-todo-desc");
     addTodoBtn.setAttribute("id", "add-todo-submit");

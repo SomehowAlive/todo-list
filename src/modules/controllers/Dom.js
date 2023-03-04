@@ -15,7 +15,7 @@ const addTodoBtn = () => {
 
 const openSidebarBtn = () => {
     const openSidebarBtn = document.createElement("button");
-    openSidebarBtn.classList.add("toggle-sidebar-btn", "absolute");
+    openSidebarBtn.classList.add("toggle-sidebar-btn");
     openSidebarBtn.appendChild(document.createElement("div"));
     openSidebarBtn.appendChild(document.createElement("div"));
     openSidebarBtn.appendChild(document.createElement("div"));
@@ -25,10 +25,10 @@ const openSidebarBtn = () => {
 
 const renderHome = () => {
     const renderHomeCards = () => {
-        const todosCreated = homeCard("todos Created", 0, "#7B00DB");
-        const todosCompleted = homeCard("todos Completed", 0, "#81FF46");
-        const todosNotCompleted = homeCard("todos non completed", 0, "#DB0000");
-        const completionPercentage = homeCard("Completion rate", "40%", "#0FC5FF");
+        const todosCreated = homeCard("Tasks Created", 0, "#7B00DB");
+        const todosCompleted = homeCard("Tasks Completed", 0, "#81FF46");
+        const todosNotCompleted = homeCard("Tasks non completed", 0, "#DB0000");
+        const completionPercentage = homeCard("Completion rate", "0%", "#0FC5FF");
         return [todosCreated, todosCompleted, todosNotCompleted, completionPercentage];
     };
     const pageContainer = document.createElement("div");

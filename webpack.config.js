@@ -17,7 +17,7 @@ module.exports = {
     plugins: [
         new HtmlWebpackPlugin({
             title: "Todo",
-            favicon: "./src/assets/favicon.png",
+            favicon: "src/assets/logo.png",
         }),
     ],
     module: {
@@ -25,6 +25,10 @@ module.exports = {
             {
                 test: /\.css$/i,
                 use: ["style-loader", "css-loader"],
+            },
+            {
+                test: /\.(png|svg|jpg|jpeg|gif)$/i,
+                type: "asset/resource",
             },
         ],
     },

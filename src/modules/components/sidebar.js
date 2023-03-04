@@ -21,7 +21,6 @@ const toggleSidebar = () => document.querySelector(".sidebar").classList.toggle(
 
 const sidebar = () => {
     const sidebarContainer = document.createElement("div");
-    const toggleSidebarBtn = document.createElement("button");
     const mainSectionContainer = document.createElement("div");
     const homeBtn = document.createElement("button");
     const todayBtn = document.createElement("button");
@@ -31,7 +30,6 @@ const sidebar = () => {
     const projectsContainer = document.createElement("div");
 
     sidebarContainer.classList.add("sidebar");
-    toggleSidebarBtn.classList.add("toggle-sidebar-btn");
     mainSectionContainer.classList.add("main-section-container");
     homeBtn.classList.add("sidebar-btn");
     todayBtn.classList.add("sidebar-btn");
@@ -49,16 +47,12 @@ const sidebar = () => {
     weekBtn.textContent = "Week";
     showProjectsBtn.textContent = "Projects";
 
-    toggleSidebarBtn.appendChild(document.createElement("div"));
-    toggleSidebarBtn.appendChild(document.createElement("div"));
-    toggleSidebarBtn.appendChild(document.createElement("div"));
-
     todayBtn.onclick = () => {
         document.querySelectorAll(".sidebar-btn").forEach((b) => b.classList.remove("active"));
         document.body.style.backgroundColor = "rgba(0, 0, 0, 0.1)";
         todayBtn.classList.add("active");
         document.querySelector(".page-container").remove();
-        document.body.appendChild(renderPage("Today"));
+        document.querySelector(".content").appendChild(renderPage("Today"));
     };
 
     weekBtn.onclick = () => {
@@ -66,7 +60,7 @@ const sidebar = () => {
         weekBtn.classList.add("active");
         document.body.style.backgroundColor = "rgba(0, 0, 0, 0.1)";
         document.querySelector(".page-container").remove();
-        document.body.appendChild(renderPage("Week"));
+        document.querySelector(".content").appendChild(renderPage("Week"));
     };
 
     homeBtn.onclick = () => {
@@ -74,11 +68,7 @@ const sidebar = () => {
         homeBtn.classList.add("active");
         document.body.style.backgroundColor = "rgba(0, 0, 0, 0.1)";
         document.querySelector(".page-container").remove();
-        document.body.appendChild(renderHome());
-    };
-
-    toggleSidebarBtn.onclick = () => {
-        toggleSidebar();
+        document.querySelector(".content").appendChild(renderHome());
     };
 
     showProjectsBtn.onclick = (e) => {
@@ -98,7 +88,7 @@ const sidebar = () => {
                     e.currentTarget.classList.add("active");
                     document.body.style.backgroundColor = projectObj.color + "4F";
                     document.querySelector(".page-container").remove();
-                    document.body.appendChild(renderPage(projectObj.name));
+                    document.querySelector(".content").appendChild(renderPage(projectObj.name));
                 };
                 projectContainer.appendChild(projectBtn);
             });
@@ -113,7 +103,6 @@ const sidebar = () => {
     projectsSectionContainer.appendChild(showProjectsBtn);
     projectsSectionContainer.appendChild(projectsContainer);
 
-    sidebarContainer.appendChild(toggleSidebarBtn);
     sidebarContainer.appendChild(mainSectionContainer);
     sidebarContainer.appendChild(projectsSectionContainer);
 
