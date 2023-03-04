@@ -8,10 +8,8 @@
 
 body {
     display: flex;
-    background: -moz-linear-gradient(90deg, rgba(2, 0, 36, 0.6) 0%, rgba(0, 0, 0, 0.6) 100%), url("./bg2.jpg");
-    background: -webkit-linear-gradient(90deg, rgba(2, 0, 36, 0.6) 0%, rgba(0, 0, 0, 0.6) 100%), url("./bg2.jpg");
-    background: linear-gradient(90deg, rgba(2, 0, 36, 0.6) 0%, rgba(0, 0, 0, 0.6) 100%), url("./bg2.jpg");
-    background-blend-mode: overlay;
+    background: linear-gradient(90deg, rgba(2, 0, 36, 0.7) 0%, rgba(0, 0, 0, 0.7) 100%), url("../assets/bg.jpg");
+    background-blend-mode: darken, overlay;
     background-attachment: fixed;
     background-size: cover;
     background-color: rgba(0, 0, 0, 0.1);
@@ -38,22 +36,25 @@ button {
     justify-content: space-around;
     align-items: center;
     padding: 1.5rem 0;
-    margin: 1.5rem auto;
+    margin: 1rem auto;
     width: 900px;
     max-height: 100px;
     color: white;
     border: none;
     outline: none;
+    backdrop-filter: blur(10px);
     border-radius: 30px;
-    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.4));
+    background-color: rgba(0, 0, 0, 0.4);
     opacity: 0;
+    transform-origin: top;
+    transform: scaleY(0);
     transition: all 0.4s ease;
     animation: card-creation 0.5s ease forwards;
 }
 
-/* .todo-card:hover {
-    background-color: var(--bg);
-} */
+.todo-card:hover {
+    backdrop-filter: blur(10px) brightness(0.2);
+}
 
 @keyframes card-creation {
     from {
@@ -281,6 +282,13 @@ button {
     background-color: rgba(255, 255, 255, 0.2);
 }
 
+.sidebar-btn.active {
+    background-color: rgba(255, 255, 255, 0.4);
+}
+
+.toggle-sidebar-btn.absolute {
+    position: fixed;
+}
 .toggle-sidebar-btn {
     justify-self: start;
     display: flex;
@@ -304,7 +312,7 @@ button {
 }
 .show-projects-btn {
     position: sticky;
-    z-index: 50;
+    z-index: 8;
     top: 0;
     left: 0;
     color: white;
@@ -364,8 +372,12 @@ button {
     transition: 0.4s ease;
 }
 .project-cont:hover {
-    background-color: var(--bg-color) !important;
+    background-color: var(--bg-hover) !important;
 }
+.project-cont.active {
+    background-color: var(--bg-active) !important;
+}
+
 .project-circle {
     width: 1rem;
     height: 1rem;
@@ -382,6 +394,20 @@ button {
     flex-direction: column;
     align-items: center;
     scroll-behavior: smooth;
+}
+
+.page-container::-webkit-scrollbar {
+    width: 4px;
+    background-color: transparent;
+    border-radius: 40px;
+}
+.page-container::-webkit-scrollbar-thumb {
+    border-radius: 40px;
+    background-color: gray;
+}
+
+.page-container::-webkit-scrollbar-thumb:hover {
+    background-color: white;
 }
 
 .page-container .toggle-sidebar-btn {
@@ -415,15 +441,181 @@ button {
     content: "+";
     color: black;
     font-size: 2rem;
-    bottom: 0;
-    right: 5%;
+    bottom: 6%;
+    right: 8%;
     width: 3.5rem;
     height: 3.5rem;
     border-radius: 50%;
-    margin: 4rem;
     background-color: white;
+    box-shadow: 0 0 0 0;
+    transition: 0.4s ease;
+    z-index: 15;
+    box-shadow: 0 0 50px 0 black;
 }
 
 .add-todo-btn:hover {
-    box-shadow: 0 0 15px white;
+    box-shadow: 0 0 50px -5px white;
+    transition: 0.4s ease;
+}
+
+/* styling add todo container */
+
+.add-todo-form {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    translate: -10vw -50%;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+    background-color: rgb(255, 255, 255);
+    border-radius: 30px;
+    animation-name: add-todo-appear;
+    animation-duration: 0.4s;
+    animation-timing-function: ease;
+    animation-fill-mode: forwards;
+    z-index: 140;
+}
+
+@keyframes add-todo-appear {
+    from {
+        transform: translate(0, 70vw);
+    }
+    to {
+        transform: translate(0, 0);
+    }
+}
+
+@keyframes add-todo-disappear {
+    to {
+        transform: translate(0, 70vw);
+    }
+    from {
+        transform: translate(0, 0);
+    }
+}
+
+.add-todo-form > div {
+    width: 500px;
+    display: flex;
+
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2em;
+}
+
+.add-todo-form label {
+    font-size: 1.2rem;
+}
+
+.add-todo-form .form-title {
+    font-size: 2rem;
+    font-weight: 800;
+}
+
+.add-todo-form input,
+.add-todo-form select,
+.add-todo-form textarea,
+.add-todo-form button {
+    border: none;
+    outline: none;
+    padding: 0.5rem 1.5rem;
+    border-radius: 15px;
+    width: 300px;
+    background-color: rgb(224, 224, 224);
+}
+
+.add-todo-desc {
+    padding: 4rem;
+}
+
+#add-todo-submit {
+    margin-top: 25px;
+    cursor: pointer;
+    font-size: 1.4rem;
+    font-weight: 600;
+    color: white;
+    background-color: rgb(47, 10, 114);
+    transition: 0.4s ease;
+}
+
+#add-todo-submit:hover {
+    background-color: rgb(88, 23, 209);
+}
+#close-add-todo {
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 0;
+    width: 2rem;
+    margin: 0 1rem;
+    padding: 1rem;
+    font-size: 1.3rem;
+    height: 2rem;
+    color: red;
+    font-weight: 1000;
+    background-color: transparent;
+}
+
+#overlay {
+    position: absolute;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0);
+    transition: 0.8s ease;
+    z-index: -5;
+}
+
+#overlay.active {
+    z-index: 88;
+    background-color: rgba(0, 0, 0, 0.6);
+}
+
+/* styling the home page */
+.home-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 4rem;
+    gap: 20px;
+    border-radius: 30px;
+    user-select: none;
+    text-align: center;
+    background-color: rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(10px);
+    border: 1px solid;
+    transition: 0.4s ease;
+    animation: card-creation 0.5s ease forwards;
+}
+.home-card:hover {
+    background-color: var(--hover-color);
+}
+
+.home-card-txt {
+    font-size: 2rem;
+    font-weight: 400;
+    color: white;
+}
+
+.home-card-num {
+    font-size: 2.5rem;
+    font-weight: 900;
+}
+
+.home-greeting {
+    color: white;
+}
+.home-cards-container {
+    width: 100%;
+    padding: 4rem;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 40px;
+    justify-content: center;
+    justify-items: center;
+    justify-items: center;
 }

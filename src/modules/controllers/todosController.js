@@ -31,6 +31,8 @@ const getWeekTodos = () => {
         });
 };
 
+const getCount = () => count;
+
 const getTodosByProject = (projectName) => {
     return todos[projectName] || null;
 };
@@ -40,4 +42,4 @@ const removeProjectTodos = (project) => {
     delete todos[project.name];
 };
 
-export { addTodo, getTodos, getTodosByProject, getTodayTodos, getWeekTodos, removeProjectTodos };
+export { addTodo, getTodos, getTodosByProject, getTodayTodos, getWeekTodos, removeProjectTodos, getCount };
