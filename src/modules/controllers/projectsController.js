@@ -1,6 +1,6 @@
 import Project from "../classes/Project";
 
-const projects = [new Project("default", "#FFF")];
+const projects = [new Project("default", "#FFFFFF")];
 
 const addProject = (projectToAdd) => {
     if (projects.some((project) => project.name === projectToAdd.name)) return false;
