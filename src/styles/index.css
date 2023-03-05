@@ -52,7 +52,8 @@ textarea {
     padding: 1.5rem 3rem;
     margin: 1rem auto;
     max-height: 120px;
-    width: 80%;
+    width: 60%;
+    max-width: 700px;
     color: white;
     border: none;
     outline: none;
@@ -244,8 +245,8 @@ textarea {
     gap: 20px;
     text-align: center;
     color: white;
-    background-color: rgba(0, 0, 0, 0.6);
-    backdrop-filter: blur(5px);
+    background-color: rgba(0, 0, 0, 0.9);
+    backdrop-filter: blur(15px);
     transition: 0.5s ease;
 }
 
@@ -692,7 +693,7 @@ textarea {
     justify-content: center;
     align-items: center;
     width: 100%;
-    padding: 1rem;
+    padding: 0.5rem;
     overflow: hidden;
     background-color: rgb(0, 0, 0, 0.7);
     backdrop-filter: blur(15px);
@@ -715,13 +716,13 @@ textarea {
 }
 
 .logo-text {
-    font-size: 2.5rem;
+    font-size: 2.4rem;
     font-weight: 1000;
     color: rgb(140, 0, 255);
 }
 
 #logo {
-    width: 45px;
+    width: 40px;
     height: auto;
 }
 
@@ -754,20 +755,29 @@ textarea {
         min-width: none;
         width: 100%;
     }
+    .logo-text {
+        display: none;
+    }
     .header {
-        justify-content: flex-start;
+        justify-content: space-between;
     }
     .logo-cont {
-        display: none;
+        margin: 0;
     }
     .add-todo-form > div {
         flex-direction: column;
+        width: 100%;
+        padding: 0;
+        margin: 0;
     }
     .add-todo-form {
         display: flex;
         flex-flow: row wrap;
         gap: 0;
+        padding: 1rem 0.5rem;
+        justify-content: center;
+        align-items: center;
         width: 100vw;
-        height: 65vh;
+        height: 60vh;
     }
 }
