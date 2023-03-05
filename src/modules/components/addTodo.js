@@ -13,7 +13,6 @@ const closeAddTodo = () => {
 
 const addTodo = () => {
     const form = document.createElement("form");
-    const formTitle = document.createElement("p");
     const titleLabel = document.createElement("label");
     const titleInput = document.createElement("input");
     const d = document.createElement("div");
@@ -43,7 +42,6 @@ const addTodo = () => {
         projectsSelect.appendChild(projectOption);
     });
 
-    formTitle.textContent = "Add new Task";
     titleLabel.textContent = "Title";
     descLabel.textContent = "Description";
     projectLabel.textContent = "Project";
@@ -60,7 +58,6 @@ const addTodo = () => {
     closeOverlayBtn.type = "button";
 
     form.classList.add("add-todo-form", "fixed-center");
-    formTitle.classList.add("form-title");
     descTxtArea.classList.add("add-todo-desc");
     addTodoBtn.setAttribute("id", "add-todo-submit");
     closeOverlayBtn.setAttribute("id", "close-add-todo");
@@ -94,7 +91,6 @@ const addTodo = () => {
     d4.appendChild(dateLabel);
     d4.appendChild(dateInput);
 
-    form.appendChild(formTitle);
     form.appendChild(d);
     form.appendChild(d2);
     form.appendChild(d3);
