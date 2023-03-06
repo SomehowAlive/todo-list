@@ -82,7 +82,7 @@ const renderPage = (pageName) => {
 
     pageContainer.appendChild(pageTitle);
 
-    if (!todosToDisplay) {
+    if (!todosToDisplay || todosToDisplay.length === 0) {
         let t = document.createElement("p");
         t.classList.add("info-text");
         t.innerText = "No todos Found in " + pageName;

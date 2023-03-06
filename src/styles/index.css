@@ -51,8 +51,9 @@ textarea {
     gap: 20px;
     padding: 1.5rem 3rem;
     margin: 1rem auto;
+    text-align: center;
     max-height: 120px;
-    width: 60%;
+    width: 70%;
     max-width: 700px;
     color: white;
     border: none;
@@ -104,6 +105,11 @@ textarea {
     font-weight: 600;
     color: white;
     margin-bottom: 0.2rem;
+}
+
+.todo-title.maximized {
+    overflow: auto;
+    white-space: pre-wrap;
 }
 
 .todo-date,
@@ -194,13 +200,14 @@ textarea {
 .markDoneBtn::before {
     position: absolute;
     content: "";
-    width: 15px;
-    height: 5px;
+    width: 8px;
+    height: 2px;
     top: 50%;
     left: 50%;
     padding: 0;
     margin: 0;
-    border: 4px solid greenyellow;
+    border-bottom: 2px solid greenyellow;
+    border-left: 4px solid greenyellow;
     border-top: none;
     border-right: none;
     transform-origin: center;
@@ -236,21 +243,20 @@ textarea {
 .sidebar {
     z-index: 1;
     display: grid;
-    grid-template-rows: 1fr 4fr;
+    grid-template-rows: 1fr 5fr;
     justify-items: center;
     height: 100vh;
     width: 450px;
     overflow: hidden;
-    gap: 20px;
     text-align: center;
     color: white;
-    background-color: rgba(0, 0, 0, 0.9);
+    background-color: rgba(0, 0, 0, 0.4);
     backdrop-filter: blur(15px);
     transition: 0.5s ease;
 }
 
 .sidebar.closed {
-    margin-left: -350px;
+    margin-left: -450px;
 }
 
 .projects-section-container {
@@ -312,9 +318,6 @@ textarea {
     background-color: rgba(255, 255, 255, 0.4);
 }
 
-.toggle-sidebar-btn.absolute {
-    position: fixed;
-}
 .toggle-sidebar-btn {
     justify-self: start;
     display: flex;
@@ -337,9 +340,10 @@ textarea {
     font-size: 1.4rem;
 }
 .show-projects-btn {
+    position: sticky;
+    top: 0;
     z-index: 8;
     color: white;
-    background-color: black;
     outline: none;
     border: none;
     width: 100%;
@@ -438,6 +442,7 @@ textarea {
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    margin-bottom: 2rem;
     width: 100%;
 }
 
@@ -725,14 +730,14 @@ textarea {
 .header {
     position: sticky;
     top: 0;
-    z-index: 12;
+    z-index: 90;
     display: flex;
     justify-content: center;
     align-items: center;
     width: 100%;
     padding: 0.5rem;
     overflow: hidden;
-    background-color: rgb(0, 0, 0, 0.7);
+    background-color: rgb(0, 0, 0, 0.6);
     backdrop-filter: blur(15px);
     border-bottom: 1px solid rgb(199, 79, 255);
 }
@@ -753,9 +758,10 @@ textarea {
 }
 
 .logo-text {
-    font-size: 2.4rem;
-    font-weight: 1000;
-    color: rgb(140, 0, 255);
+    font-size: 2rem;
+    font-weight: 900;
+    font-family: "Roboto", sans-serif;
+    color: rgb(126, 14, 255);
 }
 
 #logo {
@@ -773,7 +779,10 @@ textarea {
         position: absolute;
     }
     .sidebar.closed {
-        transform: translate(-100vw, 0);
+        margin-left: -100vw;
+    }
+    .toggle-sidebar-btn {
+        z-index: 999;
     }
     .todo-card {
         min-width: none;

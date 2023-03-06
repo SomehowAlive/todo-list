@@ -40,17 +40,21 @@ const todo = (todo) => {
         } else {
             const todoCard = this;
             const todoDescription = this.children[1].children[2];
+            const todoTitle = this.children[1].children[0];
             const doneBtn = this.children[3];
             if (!this.classList.contains("open")) {
                 todoDescription.style.animation = "desc-appear .4s ease both";
                 todoDescription.classList.add("show");
                 todoCard.style.maxHeight = todoCard.clientHeight + todoCard.children[1].children[2].clientHeight + 40 + "px";
+                todoTitle.classList.add("maximized");
                 this.classList.add("open");
                 doneBtn.classList.add("open");
             } else {
                 todoDescription.style.animation = "desc-disappear .2s ease both";
                 this.classList.remove("open");
                 doneBtn.classList.remove("open");
+                todoTitle.classList.remove("maximized");
+
                 todoCard.style.maxHeight = todoCard.clientHeight - todoCard.children[1].children[2].clientHeight - 20 + "px";
                 setTimeout(() => {
                     todoDescription.classList.remove("show");
