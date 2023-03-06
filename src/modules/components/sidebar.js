@@ -21,6 +21,26 @@ const addProjectBtn = () => {
     return addProject;
 };
 
+const updateProjects = () => {
+    const projectsContainer = document.querySelector(".projects-container");
+    Array.from(projectsContainer.children).forEach((child) => child.remove());
+    getProjects().forEach((projectObj, index) => {
+        let projectBtn = project(projectObj);
+        projectBtn.classList.add("sidebar-btn", "btn", "project-btn");
+        projectBtn.setAttribute("data-index", index);
+        if (projectObj.name === document.querySelector(".page-container")?.getAttribute("id")) projectBtn.classList.add("active");
+        projectBtn.onclick = (e) => {
+            document.querySelectorAll(".sidebar-btn").forEach((b) => b.classList.remove("active"));
+            e.currentTarget.classList.add("active");
+            document.body.style.backgroundColor = projectObj.color + "4F";
+            document.querySelector(".page-container").remove();
+            document.querySelector(".content").appendChild(renderPage(projectObj.name));
+        };
+        projectsContainer.appendChild(projectBtn);
+    });
+    projectsContainer.appendChild(addProjectBtn());
+};
+
 const toggleSidebar = () => document.querySelector(".sidebar").classList.toggle("closed");
 
 const sidebar = () => {
@@ -30,7 +50,7 @@ const sidebar = () => {
     const todayBtn = document.createElement("button");
     const weekBtn = document.createElement("button");
     const projectsSectionContainer = document.createElement("div");
-    const showProjectsBtn = document.createElement("button");
+    const projectsTitle = document.createElement("p");
     const projectsContainer = document.createElement("div");
 
     sidebarContainer.classList.add("sidebar");
@@ -43,13 +63,13 @@ const sidebar = () => {
     todayBtn.setAttribute("id", "today-btn");
     weekBtn.setAttribute("id", "week-btn");
     projectsSectionContainer.classList.add("projects-section-container");
-    showProjectsBtn.classList.add("show-projects-btn", "sidebar-btn");
+    projectsTitle.classList.add("show-projects-btn", "sidebar-btn");
     projectsContainer.classList.add("projects-container");
 
     homeBtn.textContent = "Home";
     todayBtn.textContent = "Today";
     weekBtn.textContent = "Week";
-    showProjectsBtn.textContent = "Projects";
+    projectsTitle.textContent = "Projects";
 
     todayBtn.onclick = () => {
         document.querySelectorAll(".sidebar-btn").forEach((b) => b.classList.remove("active"));
@@ -75,36 +95,27 @@ const sidebar = () => {
         document.querySelector(".content").appendChild(renderHome());
     };
 
-    showProjectsBtn.onclick = (e) => {
-        const projectContainer = e.target.parentElement.children[1];
-        if (e.target.classList.contains("open")) {
-            e.target.classList.remove("open");
-            Array.from(projectContainer.children).forEach((c) => c.remove());
-        } else {
-            e.target.classList.add("open");
-            getProjects().forEach((projectObj, index) => {
-                let projectBtn = project(projectObj);
-                projectBtn.classList.add("sidebar-btn", "btn", "project-btn");
-                projectBtn.setAttribute("data-index", index);
-                if (projectObj.name === document.querySelector(".page-container")?.getAttribute("id")) projectBtn.classList.add("active");
-                projectBtn.onclick = (e) => {
-                    document.querySelectorAll(".sidebar-btn").forEach((b) => b.classList.remove("active"));
-                    e.currentTarget.classList.add("active");
-                    document.body.style.backgroundColor = projectObj.color + "4F";
-                    document.querySelector(".page-container").remove();
-                    document.querySelector(".content").appendChild(renderPage(projectObj.name));
-                };
-                projectContainer.appendChild(projectBtn);
-            });
-            projectContainer.appendChild(addProjectBtn());
-        }
-    };
+    getProjects().forEach((projectObj, index) => {
+        let projectBtn = project(projectObj);
+        projectBtn.classList.add("sidebar-btn", "btn", "project-btn");
+        projectBtn.setAttribute("data-index", index);
+        if (projectObj.name === document.querySelector(".page-container")?.getAttribute("id")) projectBtn.classList.add("active");
+        projectBtn.onclick = (e) => {
+            document.querySelectorAll(".sidebar-btn").forEach((b) => b.classList.remove("active"));
+            e.currentTarget.classList.add("active");
+            document.body.style.backgroundColor = projectObj.color + "4F";
+            document.querySelector(".page-container").remove();
+            document.querySelector(".content").appendChild(renderPage(projectObj.name));
+        };
+        projectsContainer.appendChild(projectBtn);
+    });
+    projectsContainer.appendChild(addProjectBtn());
 
     mainSectionContainer.appendChild(homeBtn);
     mainSectionContainer.appendChild(todayBtn);
     mainSectionContainer.appendChild(weekBtn);
 
-    projectsSectionContainer.appendChild(showProjectsBtn);
+    projectsSectionContainer.appendChild(projectsTitle);
     projectsSectionContainer.appendChild(projectsContainer);
 
     sidebarContainer.appendChild(mainSectionContainer);
@@ -114,4 +125,4 @@ const sidebar = () => {
 };
 
 export default sidebar;
-export { toggleSidebar };
+export { toggleSidebar, updateProjects };

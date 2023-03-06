@@ -234,13 +234,12 @@ textarea {
 
 /* styling sdiebar */
 .sidebar {
-    /* position: fixed; */
     z-index: 1;
     display: grid;
-    grid-template-rows: 1fr 3fr;
+    grid-template-rows: 1fr 4fr;
     justify-items: center;
     height: 100vh;
-    width: 350px;
+    width: 450px;
     overflow: hidden;
     gap: 20px;
     text-align: center;
@@ -338,34 +337,15 @@ textarea {
     font-size: 1.4rem;
 }
 .show-projects-btn {
-    position: sticky;
     z-index: 8;
-    top: 0;
-    left: 0;
     color: white;
     background-color: black;
     outline: none;
     border: none;
     width: 100%;
     padding: 1.5rem;
-    margin-bottom: 20px;
-}
-
-.show-projects-btn::before {
-    position: absolute;
-    content: "";
-    width: 0.5rem;
-    height: 0.5rem;
-    border: 3px solid white;
-    border-left: none;
-    border-bottom: none;
-    top: 50%;
-    transform: translate(-200%, -50%) rotate(45deg);
-    transition: 0.4s ease;
-}
-
-.show-projects-btn.open::before {
-    transform: translate(-200%, -50%) rotate(135deg);
+    font-size: 2rem;
+    font-weight: 1000;
 }
 
 .projects-container {
@@ -668,7 +648,7 @@ textarea {
 }
 
 .add-project-form.hidden {
-    transform: translate(100vw, 0);
+    transform: translate(150vw, 0);
 }
 
 .add-project-form > div:not(:last-of-type) {

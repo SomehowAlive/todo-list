@@ -1,10 +1,11 @@
 import Project from "../classes/Project";
 import { getProjects, addProject as addProjectBackend } from "../controllers/projectsController";
 import { toggleBlackOverlay } from "../components/overlay";
+import { updateProjects } from "./sidebar";
 
 const hideAddProject = () => {
     const form = document.querySelector(".add-project-form");
-    if(form){
+    if (form) {
         form.classList.add("hidden");
         toggleBlackOverlay();
         setTimeout(() => {
@@ -66,6 +67,7 @@ const addProject = () => {
             addProjectBackend(new Project(ProjectName, ProjectColor));
             form.classList.add("hidden");
             toggleBlackOverlay();
+            updateProjects();
         } else if (ProjectName) {
             infoCont.textContent = "Project Name Already Exists ! ";
             infoCont.classList.add("error");
