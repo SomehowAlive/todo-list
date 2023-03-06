@@ -2,6 +2,7 @@ import { getProject, getProjects } from "../controllers/projectsController";
 import { addTodo as addTodoBackend } from "../controllers/todosController";
 import { toggleBlackOverlay } from "./overlay";
 import Todo from "../classes/Todo";
+import { updateTodos } from "../controllers/Dom";
 
 const closeAddTodo = () => {
     document.querySelector(".add-todo-form").style.animationName = "add-todo-disappear";
@@ -72,9 +73,10 @@ const addTodo = () => {
         const desc = descTxtArea.value.trim();
         const project = projectsSelect.value;
         const date = dateInput.value;
-        if (title && desc && project && date) {
+        if (title && project && date) {
             const newTodo = new Todo(title, desc, getProject(project), new Date(date));
             addTodoBackend(newTodo);
+            updateTodos();
             closeAddTodo();
         }
     };

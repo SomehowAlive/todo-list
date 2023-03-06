@@ -55,7 +55,8 @@ const addProject = () => {
     infoCont.classList.add("info-div");
 
     projectNameInput.oninput = (e) => {
-        if (projectsNames.includes(e.target.value)) e.target.classList.add("invalid");
+        if (projectsNames.includes(projectNameInput.value) || ["Home", "Today", "Week"].includes(projectNameInput.value))
+            projectNameInput.classList.add("invalid");
         else e.target.classList.remove("invalid");
     };
 

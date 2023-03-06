@@ -1,4 +1,4 @@
-import { getTodayTodos, getWeekTodos, getTodosByProject } from "./todosController";
+import { getTodayTodos, getWeekTodos, getTodosByProject, getCount } from "./todosController";
 import todo from "../components/todo";
 import addTodo from "../components/addTodo";
 import { toggleBlackOverlay } from "../components/overlay";
@@ -25,7 +25,7 @@ const openSidebarBtn = () => {
 
 const renderHome = () => {
     const renderHomeCards = () => {
-        const todosCreated = homeCard("Tasks Created", 0, "#7B00DB");
+        const todosCreated = homeCard("Tasks Created", getCount(), "#7B00DB");
         const todosCompleted = homeCard("Tasks Completed", 0, "#81FF46");
         const todosNotCompleted = homeCard("Tasks non completed", 0, "#DB0000");
         const completionPercentage = homeCard("Completion rate", "0%", "#0FC5FF");
@@ -48,6 +48,19 @@ const renderHome = () => {
     pageContainer.appendChild(greeting);
     pageContainer.appendChild(homeCardsContainer);
     return pageContainer;
+};
+
+const updateTodos = () => {
+    const projectName = document.querySelector(".page-container").getAttribute("id");
+    if (projectName === "Home") return;
+    let todos = null;
+    if (projectName === "Today") todos = getTodayTodos();
+    else if (projectName === "Week") todos = getWeekTodos();
+    else todos = getTodosByProject(projectName);
+
+    const todoList = document.querySelector(".todo-list");
+    Array.from(todoList.children).forEach((c) => c.remove());
+    todos.forEach((t) => todoList.appendChild(todo(t)));
 };
 
 const renderPage = (pageName) => {
@@ -86,4 +99,4 @@ const renderPage = (pageName) => {
     return pageContainer;
 };
 
-export { renderPage, renderHome, addTodoBtn, openSidebarBtn };
+export { renderPage, renderHome, addTodoBtn, openSidebarBtn, updateTodos };
