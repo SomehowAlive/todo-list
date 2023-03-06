@@ -1,6 +1,8 @@
 import { getProjects } from "../controllers/projectsController";
 import { renderPage, renderHome } from "../controllers/Dom";
 import project from "./project";
+import { default as addProjectForm } from "./addProject";
+import { toggleBlackOverlay } from "./overlay";
 
 const addProjectBtn = () => {
     const addProject = document.createElement("button");
@@ -10,6 +12,8 @@ const addProjectBtn = () => {
     addProject.appendChild(addProjectCircle);
     const txt = document.createElement("p");
     txt.textContent = "Add new";
+
+    addProject.onclick = () => document.body.appendChild(addProjectForm()) && toggleBlackOverlay();
 
     addProject.appendChild(addProjectCircle);
     addProject.appendChild(txt);

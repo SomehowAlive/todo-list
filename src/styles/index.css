@@ -653,9 +653,34 @@ textarea {
     border-radius: 30px;
     display: flex;
     flex-direction: column;
-    justify-content: space-around;
-    padding: 4rem;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem 4rem;
+    z-index: 88;
     background-color: rgb(240, 240, 240);
+    transition: 0.5s ease;
+}
+
+.add-project-form::before {
+    content: "Add New Project";
+    font-size: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.add-project-form.hidden {
+    transform: translate(100vw, 0);
+}
+
+.add-project-form > div:not(:last-of-type) {
+    display: flex;
+    align-items: center;
+    width: 90%;
+    gap: 20px;
+    margin: 0.8rem;
+}
+
+.add-project-form > div:nth-child(2) {
+    margin-bottom: 2rem;
 }
 .project-name-input {
     padding: 0.5rem 2rem;
@@ -663,7 +688,7 @@ textarea {
     border: none;
     border-radius: 30px;
     transition: 0.4s ease;
-    background-color: gray;
+    background-color: rgb(230, 230, 230);
 }
 
 .project-color-input {
@@ -677,13 +702,45 @@ textarea {
 }
 
 .project-name-input:focus {
-    box-shadow: 0 0 45px -2px rgb(88, 146, 0);
+    box-shadow: 0 0 15px 0 rgb(0, 165, 27);
 }
 
 .project-name-input.invalid {
-    box-shadow: 0 0 45px -2px red;
+    box-shadow: 0 0 25px 0 rgba(255, 0, 0, 0.521);
 }
 
+.add-project-submit {
+    padding: 0.5rem 1rem;
+    text-align: center;
+    width: 80%;
+    font-size: 1.4rem;
+    color: white;
+    border-radius: 30px;
+    background-color: purple;
+    transition: 0.4s ease;
+}
+
+.add-project-submit:hover {
+    background: rgb(202, 0, 202);
+}
+
+.info-div {
+    width: 0;
+    padding: 0;
+    margin: 0;
+    max-height: 0;
+    padding: 0.25rem 1rem;
+    border-radius: 30px;
+    transition: 0.4s ease;
+}
+.info-div.error {
+    margin: 1rem;
+    width: fit-content;
+    text-align: center;
+    max-height: fit-content;
+    color: white;
+    background-color: red;
+}
 /* styling the header */
 .header {
     position: sticky;
@@ -729,6 +786,7 @@ textarea {
 @media (max-width: 700px) {
     .sidebar {
         height: 100vh;
+        font-size: 2rem !important;
         width: 100vw;
         z-index: 22;
         background-color: rgba(0, 0, 0, 0.8);

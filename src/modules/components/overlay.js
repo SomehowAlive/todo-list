@@ -1,8 +1,12 @@
+import { hideAddProject } from "./addProject";
 const overlay = () => {
     const overlay = document.createElement("div");
     overlay.setAttribute("id", "overlay");
     overlay.onclick = (e) => {
-        document.querySelector(".add-todo-form") || e.key === "Escape" ? document.querySelector("#close-add-todo").click() : "";
+        if (document.querySelector(".add-todo-form") || e.key === "Escape" || document.querySelector(".add-project-form")) {
+            document.querySelector("#close-add-todo")?.click();
+            hideAddProject();
+        }
     };
     return overlay;
 };
